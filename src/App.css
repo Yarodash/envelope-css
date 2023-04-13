@@ -12,13 +12,15 @@ body {
   background-color: #d0d0e0;
 }
 
-body {
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
+/*body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 body::-webkit-scrollbar { 
-  display: none;  /* Safari and Chrome */
-}
+  display: none;
+}*/
+
+
 
 .app {
   width: 100%;
@@ -50,7 +52,7 @@ body::-webkit-scrollbar {
 }
 
 .inner {
-  width: min(100vh, 100vw);
+  width: min(95vh, 100vw);
   aspect-ratio: 1 / 1;
   display: flex;
   justify-content: center;
@@ -62,7 +64,7 @@ body::-webkit-scrollbar {
   margin-top: calc(var(--open-percent) * 28%);
   width: 80%;
   height: 56%;
-  filter: drop-shadow(0px 20px 40px #00000080);
+  filter: drop-shadow(0px 20px 30px #00000080);
 }
 
 .full-convert-wrapper {
@@ -73,8 +75,8 @@ body::-webkit-scrollbar {
     0% 0%, 
     50% min(0%, calc(-55% * sin((2.0 * var(--open-percent) - 1.0) * 1.5707))),
     100% 0%, 
-    100% 100%, 
-    0% 100%
+    100% 99.5%, 
+    0% 99.5%
   );
   display: grid;
   place-items: center;
@@ -84,7 +86,7 @@ body::-webkit-scrollbar {
   position: absolute;
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0px 20px 50px #00000060);
+  filter: drop-shadow(0px 20px 20px #00000060);
   display: grid;
   place-items: center;
 }
@@ -126,7 +128,7 @@ body::-webkit-scrollbar {
     0px
     max(calc(20px - var(--open-percent) * 20px), 0px)
     50px
-    rgb(0, 0, 0, calc(50% - var(--open-percent) * 100%))
+    rgb(0, 0, 0, calc(20% - var(--open-percent) * 40%))
   );
   z-index: calc(2.5 - 2 * var(--open-percent));
 }
