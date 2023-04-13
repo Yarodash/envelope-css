@@ -12,9 +12,143 @@ body {
   background-color: #d0d0e0;
 }
 
+body {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+body::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
 .app {
-  height: 100%;
+  width: 100%;
+  height: 800vh;
+  left: 0;
+  top: 0;
+  display: grid;
+  grid-template-areas: "a";
+  
+  --scroll: calc(var(--scrollTop) / (var(--docHeight) - var(--windowHeight)));
+}
+
+.cover {
+  width: 100%;
+  height: 800vh;
+  top: 0;
+  grid-area: a;
+}
+
+.outer {
+  width: 100%;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  --percent: calc((var(--scrollTop)) / (8.00 * var(--windowHeight) - var(--windowHeight)));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inner {
+  width: min(100vh, 100vw);
+  aspect-ratio: 1 / 1;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.full-convert-wrapper-shadow {
+  --open-percent: var(--percent);
+  margin-top: calc(var(--open-percent) * 28%);
+  width: 80%;
+  height: 56%;
+  filter: drop-shadow(0px 20px 40px #00000080);
+}
+
+.full-convert-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  clip-path: polygon(
+    0% 0%, 
+    50% min(0%, calc(-55% * sin((2.0 * var(--open-percent) - 1.0) * 1.5707))),
+    100% 0%, 
+    100% 100%, 
+    0% 100%
+  );
+  display: grid;
+  place-items: center;
+}
+
+.convert-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0px 20px 50px #00000060);
+  display: grid;
+  place-items: center;
+}
+
+.top-wrapper  {
+  z-index: 3;
+}
+.back-wrapper {
+  z-index: 0;
+}
+:is(.left-wrapper, .right-wrapper, .bottom-wrapper) {
+  z-index: 2;
+}
+
+.convert {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(-25deg, #c0a0a0, #a0a0c0);
+}
+
+.left {
+  clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
+}
+
+.right {
+  clip-path: polygon(100% 0%, 100% 100%, 0% 100%);
+}
+
+.bottom {
+  clip-path: polygon(50% 40%, 100% 100%, 0% 100%);
+}
+
+.back {
+  clip-path: none;
+}
+
+.top-wrapper {
+  filter: drop-shadow(
+    0px
+    max(calc(20px - var(--open-percent) * 20px), 0px)
+    50px
+    rgb(0, 0, 0, calc(50% - var(--open-percent) * 100%))
+  );
+  z-index: calc(2.5 - 2 * var(--open-percent));
+}
+
+.top {
+  clip-path: polygon(50% 55%, 100% 0%, 0% 0%);
+  transform: rotateX(calc(var(--open-percent) * 180deg));
+  transform-origin: 50% 0%; 
+}
+
+.image-inside {
+  position: absolute;
+  width: 50%;
+  aspect-ratio: 1;
+  z-index: 1;
+  box-shadow: 0px 5px 20px 2px #00000080;
+  margin-top: calc(15% + (max(var(--open-percent), 0.7) - 0.7) * -230%);
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.image-inside img {
+  width: 100%;
+  height: 100%;
 }
