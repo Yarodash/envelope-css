@@ -49,6 +49,7 @@ body::-webkit-scrollbar {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .inner {
@@ -57,6 +58,10 @@ body::-webkit-scrollbar {
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: 
+    perspective(1000px) 
+    rotateX(calc((var(--cursorY) - 0.5) * -40deg))
+    rotateY(calc((var(--cursorX) - 0.5) * 40deg));
 }
 
 .full-convert-wrapper-shadow {
@@ -74,11 +79,11 @@ body::-webkit-scrollbar {
   --a: calc((2.0 * var(--open-percent) - 1.0) * 1.5707);
   --b: sin(var(--a));
   clip-path: polygon(
-    0% 0%, 
+    0.5% 0%, 
     50% min(0%, calc(-55% * var(--b))),
-    100% 0%,  
-    100% 99.5%,  
-    0% 99.5%);
+    99.5% 0.5%,  
+    99.5% 99.5%,
+    0.5% 99.5%);
   display: grid;
   place-items: center;
 }

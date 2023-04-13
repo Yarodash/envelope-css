@@ -26,11 +26,33 @@ function App() {
     };
   }, []);
 
+  const [cursorPosition, setCursorPosition] = useState({ cursorX: 0, cursorY: 0 });
+
+  const updateCursorPosition = (e) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+
+    const cursorX = clientX / innerWidth;
+    const cursorY = clientY / innerHeight;
+
+    setCursorPosition({ cursorX, cursorY });
+  };
+
+  useEffect(() => {
+    window.addEventListener('mousemove', updateCursorPosition);
+
+    return () => {
+      window.removeEventListener('mousemove', updateCursorPosition);
+    };
+  }, []);
+
   return (
     <div className="app" style={{
         "--scrollTop": scrollTop,
         "--windowHeight": windowHeight,
         "--docHeight": docHeight,
+        "--cursorX": cursorPosition.cursorX,
+        "--cursorY": cursorPosition.cursorY
       }}>
       <div className='cover'>
         <div className='outer'>
